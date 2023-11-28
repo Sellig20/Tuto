@@ -70,15 +70,19 @@ const App = () => {
         </button>
       </div> 
       <ul>
-        <ul>
-          {notesToShow.map(note => 
-            <Note
-              key={note.id}
-              note={note}
-              toggleImportance={() => toggleImportanceOf(note.id)}
-            />
-          )}
-        </ul>
+      <ul>
+      {Array.isArray(notesToShow) ? (
+        notesToShow.map(note => (
+          <Note
+            key={note.id}
+            note={note}
+            toggleImportance={() => toggleImportanceOf(note.id)}
+          />
+        ))
+      ) : (
+        <p>Notes are not available or not in the correct format.</p>
+      )}
+    </ul>
       </ul>
       <form onSubmit={addNote}>
         <input value={newNote} onChange={handleNoteChange} />
